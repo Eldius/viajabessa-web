@@ -1,0 +1,76 @@
+<header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<span class="navbar-brand" style="color: white;">
+				<fmt:message key="main.link" />
+			</span>
+		</div>
+		<nav class="collapse navbar-collapse" role="navigation">
+			<c:if test="${empty accessSession.apiSession}">
+				<ul class="nav navbar-nav" id="menu">
+					<li class="active">
+						<a href="${linkTo[AccessController].login}"><fmt:message key="menu.item.login" /></a>
+					</li>
+				</ul>
+			</c:if>
+			<c:if test="${not empty accessSession.apiSession}">
+				<ul class="nav navbar-nav" id="menu">
+					<li class="taskMenu">
+						<a href="${linkTo[AccessController].login}"><fmt:message key="menu.item.tasks" /></a>
+					</li>
+ 					<li class="findMenu">
+ 						<a href="${linkTo[FinderController].index}"><fmt:message key="menu.item.find" /></a>
+ 					</li>
+					<c:if test="${accessSession.isAdmin()}">
+						<li class="dropdown gerenciamento managementMenu">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<fmt:message key="menu.item.management" />
+							<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="${linkTo[UserController].index}"><fmt:message key="menu.item.management.users" /></a>
+								</li>
+								<li>
+									<a href="${linkTo[GroupsController].index}"><fmt:message key="menu.item.management.groups" /></a>
+								</li>
+								<li>
+									<a href="${linkTo[ProcessController].index}" id="processManagement"><fmt:message key="menu.item.management.process" /></a>
+								</li>
+								<li>
+									<a href="${linkTo[DocumentController].index}" id="documentManagement"><fmt:message key="menu.item.management.documents" /></a>
+								</li>
+								<li>
+									<a href="${linkTo[ManagementController].forms}" id="formManagement"><fmt:message key="menu.item.management.forms" /></a>
+								</li>
+								<li>
+									<a href="${linkTo[DatasourceController].index}" id="datasourceManagement"><fmt:message key="menu.item.management.datasources" /></a>
+								</li>
+							</ul>
+						</li>
+					</c:if>
+				</ul>
+				<ul class="nav navbar-nav navbar-right" id="userSession">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							${accessSession.apiSession.getUserName()} <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a href="${linkTo[AccessController].exit}"><fmt:message key="menu.item.user.logout" /></a>
+							</li>
+							<li class="divider"></li>
+						</ul>
+					</li>
+				</ul>
+			</c:if>
+		</nav>
+		<!--/.nav-collapse -->
+	</div>
+</header>
