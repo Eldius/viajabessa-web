@@ -22,6 +22,8 @@ public class PacoteViagem implements Serializable {
 
     private BigDecimal valor;
 
+    private String foto;
+
     public Long getId() {
         return id;
     }
@@ -52,6 +54,14 @@ public class PacoteViagem implements Serializable {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     @Override
